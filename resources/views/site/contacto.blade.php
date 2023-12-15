@@ -8,10 +8,10 @@
 
             <div class="informacao-pagina" style="text-align:center;display: flex; justify-content: center">
                 <div class="contato-principal" style="width: 60%;">
-                    @component('components.form_contacto',['class'=>'borda-preta'])
+                    <x-form-contacto clase="borda-preta">
                         <p>Nuestro equipo analisará su mensaje y respondera lo mas pronto posible</p>
                         <p>Nuestro tiempo medio de respuesta es de 45 minutos</p>
-                    @endcomponent
+                    </x-form-contacto >
                 </div>
             </div>
         </div>

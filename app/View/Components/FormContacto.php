@@ -1,0 +1,31 @@
+<?php
+
+namespace App\View\Components;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+use Illuminate\Database\Eloquent\Collection;
+use \App\Models\MotivoContacto;
+
+class FormContacto extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public function __construct(
+        public string $clase,
+        public Collection $motivo_contactos
+    ){
+
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        $this->motivo_contactos = MotivoContacto::all();
+        return view('components.form-contacto');
+    }
+}

@@ -24,10 +24,10 @@
 
         <div class="direita">
             <div class="contato">
-                <x-form_contacto class="borda-branca">
+                <x-form-contacto clase="borda-branca">
                     <h1>Contacto</h1>
                     <p>En caso tenga alguna duda entre en contacto con el formulario abajo.<p>
-                </x-form_contacto >
+                </x-form-contacto >
             </div>
         </div>
     </div>

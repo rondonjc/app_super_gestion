@@ -16,7 +16,7 @@ use App\Http\Controllers;
 Route::get('/',[Controllers\PrincipalController::class,'principal'])->name('site.principal');
 Route::get('/sobre-nosotros', [Controllers\SobreNosotrosController::class,'sobreNosotros'])->name('site.sobrenosotros');
 Route::get('/contactos', [Controllers\ContactosController::class,'contactos'])->name('site.contacto');
-Route::post('/contactos', [Controllers\ContactosController::class,'contactos'])->name('site.contacto');
+Route::post('/contactos', [Controllers\ContactosController::class,'guardar'])->name('site.contacto');
 Route::get('/login',function(){ return "Login";})->name('site.login');
 
 Route::prefix('/app')->group(function(){
