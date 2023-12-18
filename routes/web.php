@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use App\Http\Controllers\Controller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,12 +19,14 @@ Route::get('/',[Controllers\PrincipalController::class,'principal'])->name('site
 Route::get('/sobre-nosotros', [Controllers\SobreNosotrosController::class,'sobreNosotros'])->name('site.sobrenosotros');
 Route::get('/contactos', [Controllers\ContactosController::class,'contactos'])->name('site.contacto');
 Route::post('/contactos', [Controllers\ContactosController::class,'guardar'])->name('site.contacto');
-Route::get('/login',function(){ return "Login";})->name('site.login');
+Route::get('/login', [Controllers\LoginController::class,'index'])->name('site.login');
+Route::POST('/login', [Controllers\LoginController::class,'autenticar'])->name('site.login');
 
-Route::prefix('/app')->group(function(){
-
-    Route::get('/clientes',function(){ return "Clientes";})->name('app.clientes');
-    Route::get('/proveedores',function(){ return "Proveedores";})->name('app.proveedores');
-    Route::get('/productos',function(){ return "Productos";})->name('app.produtos');
+Route::middleware('autenticacion.middleware')->prefix('/app')->group(function(){
+    Route::get('/home',[Controllers\HomeController::class,'index'])->name('app.home');
+    Route::get('/cliente',[Controllers\ClienteController::class,'index'])->name('app.clientes');
+    Route::get('/proveedor',[Controllers\ProveedorController::class,'index'])->name('app.proveedor');
+    Route::get('/producto',[Controllers\ProductoController::class,'index'])->name('app.produto');
+    Route::get('/salir',[Controllers\LoginController::class,'salir'])->name('app.salir');
 
 });
