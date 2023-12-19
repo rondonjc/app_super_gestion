@@ -16,7 +16,7 @@
                         {{$errors->has('password')?$errors->first('password'):''}}
                         <button type="submit">Acessar</button>
                     </form>
-                    {{(isset($erro) && $erro!="")?"Usuario o Contraseña errada.":""}}
+                    {{(isset($erro) && $erro!="")?$erro:""}}
                 </div>
 
             </div>

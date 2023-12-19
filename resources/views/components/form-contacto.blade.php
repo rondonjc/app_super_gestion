@@ -5,7 +5,7 @@
         {{$errors->has('nombre')?$errors->first('nombre'):""}}
     <br>
     <input name='telefono' type="text" placeholder="Telefono" value="{{old('telefono')}}"  class="{{$clase}}">
-        {{$errors->has('telefono')?$errors->first('nombre'):""}}
+        {{$errors->has('telefono')?$errors->first('telefono'):""}}
     <br>
     <input name='email' type="text" placeholder="E-mail" value="{{old('email')}}"  class="{{$clase}}">
         {{$errors->has('email')?$errors->first('email'):""}}

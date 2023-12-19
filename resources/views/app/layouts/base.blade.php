@@ -7,8 +7,8 @@
     </head>
 
     <body>
-        @include('site.layouts.menu')
+        @include('app.layouts.menu')
         @yield('conteudo')
-        @include('site.layouts.footer')
+        @include('app.layouts.footer')
     </body>
 </html>
