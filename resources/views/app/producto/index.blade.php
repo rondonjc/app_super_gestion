@@ -5,7 +5,12 @@
     <div class="titulo-pagina2">
         <h1>Lista de Productos</h1>
     </div>
-
+    <div class="menu">
+        <ul>
+            <li><a href="{{route('producto.create')}}">Novo</a></li>
+            <li><a href="">Consulta</a></li>
+        </ul>
+    </div>
     <div class="informacao-pagina" style="text-align:center;display: flex; justify-content: center">
         <div style="width: 90%; margin-left:auto; margin-right:auto;">
             <table border="1" style="width: 100%;">
@@ -16,6 +21,7 @@
                     <th>Unidad</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </thead>
                 <tbody>
                     @foreach ($productos as $producto )
@@ -24,8 +30,15 @@
                             <td>{{$producto->descripcion}}</td>
                             <td>{{$producto->peso}}</td>
                             <td>{{$producto->unidad_id}}</td>
-                            <td><a href="{{route('app.proveedor.editar',$producto->id)}}">Editar</a></td>
-                            <td><a href="{{route('app.proveedor.eliminar',$producto->id)}}">Eliminar</a></td>
+                            <td><a href="{{route('producto.show',['producto'=>$producto->id])}}">Visualizar</a></td>
+                            <td><a href="{{route('producto.edit',['producto'=>$producto->id])}}">Editar</a></td>
+                            <td>
+                                <form method="POST" action="{{route('producto.destroy',['producto'=>$producto->id])}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Eliminar</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

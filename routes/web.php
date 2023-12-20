@@ -40,4 +40,6 @@ Route::middleware('autenticacion.middleware')->prefix('/app')->group(function(){
 
     Route::resource('producto',Controllers\ProductoController::class);
 
+    Route::resource('producto-detalle',Controllers\ProductoDetalleController::class);
+
 });
