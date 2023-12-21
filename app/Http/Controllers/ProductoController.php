@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\ProductoDetalle;
+use App\Models\Proveedor;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,8 @@ class ProductoController extends Controller
      */
     public function index(Request $request){
 
-        $productos = Producto::paginate(10);
+        $productos = Producto::with(['productoDetalle','proveedor'])->paginate(10);
+
         return view('app.producto.index',['productos'=>$productos,'request'=>$request->all()]);
     }
 
@@ -23,7 +26,8 @@ class ProductoController extends Controller
     public function create()
     {
         $unidades = Unidad::all();
-        return view('app.producto.create',['unidades'=>$unidades]);
+        $proveedores = Proveedor::all();
+        return view('app.producto.create',['unidades'=>$unidades,'proveedores'=>$proveedores]);
     }
 
     /**
@@ -71,7 +75,8 @@ class ProductoController extends Controller
     public function edit(Producto $producto)
     {
         $unidades = Unidad::all();
-        return view('app.producto.edit',['producto'=>$producto,'unidades'=>$unidades]);
+        $proveedores = Proveedor::all();
+        return view('app.producto.edit',['producto'=>$producto,'unidades'=>$unidades,'proveedores'=>$proveedores]);
     }
 
     /**
@@ -83,7 +88,8 @@ class ProductoController extends Controller
             'nombre'=>'required|min:3|max:40',
             'descripcion'=>'required|min:10|max:250',
             'peso'=>'required|numeric',
-            'unidad_id'=>'required|exists:unidades,id'
+            'unidad_id'=>'required|exists:unidades,id',
+            'proveedor_id'=>'required|exists:proveedores,id'
         ];
 
         $feedback = [
@@ -96,6 +102,7 @@ class ProductoController extends Controller
         $producto->descripcion = strtoupper($request->get('descripcion'));
         $producto->peso = $request->get('peso');
         $producto->unidad_id = $request->get('unidad_id');
+        $producto->proveedor_id = $request->get('proveedor_id');
         $producto->save();
 
         return redirect()->route('producto.show',['producto'=>$producto]);

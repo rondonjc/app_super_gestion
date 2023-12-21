@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class PedidoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $clientes = Cliente::paginate('10');
-        return view('app.cliente.index',['clientes'=>$clientes,'request'=>$request->all()]);
+        $pedidos = Pedido::paginate('10');
+        return view('app.pedido.index',['pedidos'=>$pedidos,'request'=>$request->all()]);
     }
 
     /**
@@ -21,7 +22,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('app.cliente.create');
+        $clientes = Cliente::all();
+        return view('app.pedido.create',['clientes'=>$clientes]);
     }
 
     /**
@@ -30,23 +32,22 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $reglas= [
-            'nombre'=>'required|min:3|max:50',
+            'cliente_id'=>'exists:clientes,id',
         ];
 
         $request->validate($reglas);
 
-        $cliente = new Cliente();
-        $cliente->nombre = strtoupper($request->get('nombre'));
+        $pedido = new Pedido();
+        $pedido->cliente_id = $request->get('cliente_id');
+        $pedido->save();
 
-        $cliente->save();
-
-        return redirect()->route('cliente.index');
+        return redirect()->route('pedido.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Cliente $cliente)
+    public function show(Pedido $pedido)
     {
         //
     }
@@ -54,7 +55,7 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cliente $cliente)
+    public function edit(Pedido $pedido)
     {
         //
     }
@@ -62,7 +63,7 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, Pedido $pedido)
     {
         //
     }
@@ -70,7 +71,7 @@ class ClienteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cliente $cliente)
+    public function destroy(Pedido $pedido)
     {
         //
     }

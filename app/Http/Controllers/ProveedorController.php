@@ -13,7 +13,7 @@ class ProveedorController extends Controller
 
     public function listar(Request $request){
 
-        $proveedores = Proveedor::where('nombre','like','%'.$request->input('nombre').'%')
+        $proveedores = Proveedor::with(['productos'])->where('nombre','like','%'.$request->input('nombre').'%')
         ->where('site','like','%'.$request->input('site').'%')
         ->where('uf','like','%'.$request->input('uf').'%')
         ->where('email','like','%'.$request->input('email').'%')

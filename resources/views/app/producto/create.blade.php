@@ -31,6 +31,13 @@
                     @endforeach
                 </select>
                 {{$errors->has('unidad_id')?$errors->first('unidad_id'):""}}
+                <select name="proveedor_id" class="borda-preta">
+                    <option value="">-- Seleccione un proveedor --</option>
+                    @foreach ($proveedores as $proveedor)
+                        <option {{(old('proveedor_id')==$proveedor->id)?'selected':''}} value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                    @endforeach
+                </select>
+                {{$errors->has('proveedor_id')?$errors->first('proveedor_id'):""}}
                 <button type="submit" >Adicionar</button>
             </form>
         </div>

@@ -23,7 +23,6 @@ Route::post('/login', [Controllers\LoginController::class,'autenticar'])->name('
 
 Route::middleware('autenticacion.middleware')->prefix('/app')->group(function(){
     Route::get('/home',[Controllers\HomeController::class,'index'])->name('app.home');
-    Route::get('/cliente',[Controllers\ClienteController::class,'index'])->name('app.cliente');
     Route::get('/salir',[Controllers\LoginController::class,'salir'])->name('app.salir');
 
 
@@ -42,4 +41,14 @@ Route::middleware('autenticacion.middleware')->prefix('/app')->group(function(){
 
     Route::resource('producto-detalle',Controllers\ProductoDetalleController::class);
 
+    Route::resource('cliente',Controllers\ClienteController::class);
+
+    Route::resource('pedido',Controllers\PedidoController::class);
+
+    //Route::resource('pedido-producto',Controllers\PedidoProductoController::class);
+
+    Route::get('app/pedido-producto/create/{pedido}',[Controllers\PedidoProductoController::class,'create'])->name('pedido-producto.create');
+    Route::post('app/pedido-producto/store/{pedido}',[Controllers\PedidoProductoController::class,'store'])->name('pedido-producto.store');
+   //Route::delete('app/pedido-producto/destroy/{pedido}/{producto}',[Controllers\PedidoProductoController::class,'destroy'])->name('pedido-producto.destroy');
+    Route::delete('app/pedido-producto/destroy/{pedidoProducto}',[Controllers\PedidoProductoController::class,'destroy'])->name('pedido-producto.destroy');
 });

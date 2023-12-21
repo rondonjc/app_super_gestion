@@ -12,10 +12,14 @@
     </div>
 
     <div class="informacao-pagina" style="text-align:center; display: flex; justify-content: center">
-
         <div style="width: 30%; margin-left:auto; margin-right:auto;">
+            <h4>Producto</h4>
+            <div>Nombre: {{$productoDetalle->producto->nombre}}</div>
+            <br>
+            <div>Descripcion: {{$productoDetalle->producto->descripcion}}</div>
+            <br>
             {{$msj??""}}
-            <x-producto_detalle.form_crete_edit :unidades="$unidades" :producto_detalle="$producto_detalle"/>
+            <x-producto_detalle.form_crete_edit :unidades="$unidades" :producto_detalle="$productoDetalle"/>
         </div>
     </div>
 </div>

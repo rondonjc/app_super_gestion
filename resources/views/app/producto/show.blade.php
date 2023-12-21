@@ -31,6 +31,9 @@
                 <tr>
                     <th>Unidad</th><td>{{$producto->unidad_id}}</td>
                 </tr>
+                <tr>
+                    <th>Proveedor</th><td>{{$producto->proveedor->nombre}}</td>
+                </tr>
             </table>
         </div>
     </div>
